@@ -89,23 +89,34 @@ void describeRoom(Room *playerRoom){
 }
 
 bool parseInput(Room *&playerRoom){
-  char * input;
-  cin >> input;
-  char * inputToken = strtok (input," ");
-  for (int i = 0; i < 4; i++){
-    if ( inputToken == playerRoom->getName(i) ){
+  string input;
+  string parsedInput [2];
+ 
+  parsedInput[0] = "";
+  parsedInput[1] = "";
+
+  getline (cin, input);
+  
+  int j = 0;
+  for (int i = 0; i < input.length(); i++){
+    if (j < 2 && input[i] != ' '){
+      parsedInput[j] += input[i];
+    } else {
+      j++;
+    }
+  }
+
+  for (int i = 0; i < 4; i++){  
+    if ( parsedInput[0] == playerRoom->getName(i) ){
       if (playerRoom->getNeighbor(i)->isPit()){
-        //DEBUG
-        cout << inputToken << " is " << playerRoom->getName(i) << '\n';
-        //END DEBUG
         cout << pit << '\n';
         return true;
       } else if (playerRoom->getNeighbor(i)->isWumpus()){
         cout << wumpus << '\n';
         return true;
       }
+      bool displayedOneYet = false;
       for (int j = 0; j < 4; j++){
-        bool displayedOneYet = false;
         if (playerRoom->getNeighbor(i)->getNeighbor(j) == playerRoom){
           if (!displayedOneYet){
             cout << "You enter the room by the door labeled " << playerRoom->getNeighbor(i)->getName(j) << ".\n";
@@ -118,16 +129,10 @@ bool parseInput(Room *&playerRoom){
       playerRoom = playerRoom->getNeighbor(i);
       break;
     }
-    //DEBUG
-    else {
-      cout << inputToken << " is not " << playerRoom->getName(i) << '\n';
-    }
-    //END DEBUG
   }
-  if (inputToken == "shoot") {
-    inputToken = strtok(NULL," ");
+  if (parsedInput[0] == "shoot") {
     for (int i = 0; i < 4; i++){
-      if (inputToken == playerRoom->getName(i)){
+      if (parsedInput[1] == playerRoom->getName(i)){
         if (playerRoom->getNeighbor(i)->isWumpus()){
           cout << "You shot the wumpus! Congratulations!" << '\n';
           return true;
