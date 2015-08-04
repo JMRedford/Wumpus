@@ -22,6 +22,10 @@ using namespace std;
 
 int main() {
   srand (time(NULL));
+  cout << "Welcome to Hunt The Wumpus!\n";
+  cout << "Type the name of the door to go through.\n";
+  cout << "Type shoot and then the name of a door to shoot through the doorway.\n";
+  cout << "You only have one bullet.  Beware of bottomless pits.\n";
   Room *playerPosition = createRandomBoard(10);
   bool gameOver = false;
   while (!gameOver){
