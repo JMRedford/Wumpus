@@ -29,6 +29,7 @@ int main() {
   Room *playerPosition = createRandomBoard(10);
   bool gameOver = false;
   while (!gameOver){
+    cout << '\n';
     describeRoom(playerPosition);
     gameOver = parseInput(*&playerPosition);
   }
