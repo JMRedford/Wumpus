@@ -10,6 +10,7 @@ string pit = "You fall... ... You are dead.";
 
 string exitNames[17][4] = {{"red", "green", "blue", "yellow"},
                            {"adam","ben","charlie","dave"},
+                           {"a","b","c","d"},
                            {"alice","bonnie","claire","dorcas"},
                            {"ape","bear","crocodile","dragon"},
                            {"Matthew","Mark","Luke","John"},
